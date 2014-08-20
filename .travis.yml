@@ -1,8 +1,8 @@
 language: c
 
 install:
-  - apt-get update
-  - apt-get install gperf
+  - sudo apt-get update
+  - sudo apt-get install gperf
 
 script:
   - cd $TRAVIS_BUILD_DIR/crosstool-ng
