@@ -19,3 +19,6 @@ script:
   - mv arm-unknown-linux-gnueabi.config /tmp/.config
   - cd /tmp
   - ct-ng build
+
+after_failure:
+  - tail build.log
