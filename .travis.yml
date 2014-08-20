@@ -21,4 +21,4 @@ script:
   - ct-ng build
 
 after_failure:
-  - tail build.log
+  - tail --lines=100 build.log
