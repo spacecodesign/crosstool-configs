@@ -1,7 +1,7 @@
 language: c
 script:
-  cd $TRAVIS_BUILD_DIR/crosstool-ng
-  ./bootstrap
-  ./configure --prefix=/tmp/ct-ng
-  make
-  make install
+  - cd $TRAVIS_BUILD_DIR/crosstool-ng
+  - ./bootstrap
+  - ./configure --prefix=/tmp/ct-ng
+  - make
+  - make install
