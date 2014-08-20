@@ -1,1 +1,12 @@
 language: c
+
+install:
+  - sudo apt-get update
+  - sudo apt-get install gperf texinfo
+
+script:
+  - cd $TRAVIS_BUILD_DIR/crosstool-ng
+  - ./bootstrap
+  - ./configure --prefix=/tmp/ct-ng
+  - make
+  - make install
