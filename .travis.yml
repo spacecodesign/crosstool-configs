@@ -15,6 +15,7 @@ before_script:
   - export PATH="${PATH}:/tmp/ct-ng/bin"
 
 script:
+  - unset LD_LIBRARY_PATH
   - cd $TRAVIS_BUILD_DIR
   - mv arm-unknown-linux-gnueabi.config /tmp/.config
   - cd /tmp
