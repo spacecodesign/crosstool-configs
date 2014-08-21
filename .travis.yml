@@ -20,7 +20,7 @@ script:
   - cd $TRAVIS_BUILD_DIR
   - mv arm-unknown-linux-gnueabi.config /tmp/.config
   - cd /tmp
-  - ct-ng build.5
+  - ct-ng build.4
 
 after_failure:
   - tail --lines=100 build.log
