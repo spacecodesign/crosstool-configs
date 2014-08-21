@@ -15,6 +15,7 @@ before_script:
   - export PATH="${PATH}:/tmp/ct-ng/bin"
 
 script:
+  - sudo apt-get install ash
   - unset CC
   - unset LD_LIBRARY_PATH
   - cd $TRAVIS_BUILD_DIR
