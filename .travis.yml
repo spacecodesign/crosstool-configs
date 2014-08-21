@@ -5,6 +5,7 @@ before_install:
 
 install:
   - sudo apt-get install gperf texinfo
+  - sudo ln -sf ld.gold /usr/bin/ld
 
 before_script:
   - cd $TRAVIS_BUILD_DIR/crosstool-ng
