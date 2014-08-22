@@ -1,6 +1,7 @@
 language: c
 
 before_install:
+  - free -m
   - sudo apt-get update
 
 install:
