@@ -16,3 +16,6 @@ $RPM $REPO/fedora-cygwin/RPMS/noarch/cygwin32-w32api-headers-3.1.0-2.noarch.rpm
 $RPM $REPO/fedora-cygwin/RPMS/noarch/cygwin32-w32api-runtime-3.1.0-1.noarch.rpm
 $RPM $REPO/fedora-cygwin/RPMS/noarch/cygwin32-ncurses-5.9-2.20140524.noarch.rpm
 $RPM $REPO/fedora-cygwin/RPMS/noarch/cygwin32-expat-2.1.0-2.noarch.rpm
+
+ln -sf /usr/lib/x86_64-linux-gnu/libmpfr.so.4 /usr/lib/x86_64-linux-gnu/libmpfr.so.1
+ln -sf /usr/lib/x86_64-linux-gnu/libgmp.so.10 /usr/lib/x86_64-linux-gnu/libgmp.so.3
