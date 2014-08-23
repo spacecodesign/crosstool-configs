@@ -5,6 +5,7 @@ before_install:
   - sudo service postgresql stop
   - sudo service couchdb stop
   - free -m
+  - ps -wweo pcpu,pmem,args --sort -pmem
   - sudo apt-get update
 
 install:
