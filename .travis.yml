@@ -30,3 +30,4 @@ script:
 
 after_failure:
   - tail --lines=100 build.log
+  - dmesg
