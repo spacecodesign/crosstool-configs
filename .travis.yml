@@ -19,7 +19,7 @@ script:
   - unset CC
   - unset LD_LIBRARY_PATH
   - cd $TRAVIS_BUILD_DIR
-  - ./ubuntu-install-cygwin-gcc
+  - sudo ./ubuntu-install-cygwin-gcc
   - sudo apt-get install ash
   - mv cygwin-arm-unknown-linux-gnueabi.config /tmp/.config
   - cd /tmp
