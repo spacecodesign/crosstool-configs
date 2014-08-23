@@ -16,11 +16,12 @@ before_script:
   - export PATH="${PATH}:/tmp/ct-ng/bin"
 
 script:
-  - sudo apt-get install ash
   - unset CC
   - unset LD_LIBRARY_PATH
   - cd $TRAVIS_BUILD_DIR
-  - mv arm-unknown-linux-gnueabi.config /tmp/.config
+  - ./ubuntu-install-cygwin-gcc
+  - sudo apt-get install ash
+  - mv cygwin-arm-unknown-linux-gnueabi.config /tmp/.config
   - cd /tmp
   - ct-ng build.4
 
