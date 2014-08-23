@@ -1,6 +1,9 @@
 language: c
 
 before_install:
+  - sudo service mysql stop
+  - sudo service postgresql stop
+  - sudo service couchdb stop
   - free -m
   - sudo apt-get update
 
