@@ -1,5 +1,9 @@
 language: c
 
+env:
+  - CREATE_TOOLCHAIN=arm-unknown-linux-gnueabi
+  - CREATE_TOOLCHAIN=cygwin-arm-unknown-linux-gnueabi CYGWIN_HOST=1
+
 before_install:
   - sudo service mysql stop
   - sudo service postgresql stop
@@ -25,9 +29,9 @@ script:
   - unset CC
   - unset LD_LIBRARY_PATH
   - cd $TRAVIS_BUILD_DIR
-  - sudo ./ubuntu-install-cygwin-gcc
+  - if [[ -n "${CYGWIN_HOST}" ]]; then sudo ./ubuntu-install-cygwin-gcc; fi
   - sudo apt-get install ash
-  - mv cygwin-arm-unknown-linux-gnueabi.config /tmp/.config
+  - mv ${CREATE_TOOLCHAIN}.config /tmp/.config
   - cd /tmp
   - ct-ng build.4
 
