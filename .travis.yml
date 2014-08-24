@@ -8,6 +8,9 @@ before_install:
   - sudo service mysql stop
   - sudo service postgresql stop
   - sudo service couchdb stop
+  - sudo service cron stop  
+  - sudo service dbus stop
+  - sudo service udev stop  
   - sudo rm -rf /var/ramfs/mysql
   - sudo rm -rf /var/ramfs/postgresql
   - free -m
