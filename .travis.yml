@@ -8,7 +8,7 @@ before_install:
   - sudo rm -rf /var/ramfs/postgresql
   - free -m
   - ps -wweo pcpu,pmem,args --sort -pmem
-  - sudo apt-get update
+  - sudo apt-get update -qq
 
 install:
   - sudo apt-get install gperf texinfo

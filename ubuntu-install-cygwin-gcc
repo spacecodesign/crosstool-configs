@@ -5,7 +5,7 @@ if ! command -v rpm >/dev/null 2>&1 ; then
   apt-get install rpm
 fi
 
-RPM="rpm --install --nodeps --replacepkgs"
+RPM="rpm --quiet --install --nodeps --replacepkgs"
 REPO="ftp://ftp.cygwinports.org/pub/cygwinports"
 $RPM $REPO/EL6/RPMS/x86_64/cygwin32-binutils-2.24.51-1.el6.x86_64.rpm
 $RPM $REPO/EL6/RPMS/x86_64/cygwin32-cpp-4.8.2-2.el6.x86_64.rpm
