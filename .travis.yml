@@ -35,7 +35,7 @@ script:
   - sudo apt-get install ash
   - mv ${CREATE_TOOLCHAIN}.config /tmp/.config
   - cd /tmp
-  - ct-ng build.2
+  - ct-ng build.3
 
 after_failure:
   - tail --lines=100 build.log
