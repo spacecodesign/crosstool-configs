@@ -1,6 +1,7 @@
 language: c
 
 env:
+  - CREATE_TOOLCHAIN=arm-none-eabi
   - CREATE_TOOLCHAIN=arm-unknown-linux-gnueabi
   - CREATE_TOOLCHAIN=cygwin-arm-unknown-linux-gnueabi CYGWIN_HOST=1
 
