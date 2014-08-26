@@ -33,7 +33,7 @@ script:
   - unset LD_LIBRARY_PATH
   - cd $TRAVIS_BUILD_DIR
   - if [[ -n "${CYGWIN_HOST}" ]]; then sudo ./ubuntu-install-cygwin-gcc; fi
-  - sudo apt-get install ash
+  - sudo apt-get install ash ccache
   - mv ${CREATE_TOOLCHAIN}.config /tmp/.config
   - cd /tmp
   - CCACHE_SLOPPINESS=include_file_mtime CCACHE_COMPILERCHECK=mtime ct-ng build.3
