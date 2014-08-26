@@ -37,14 +37,14 @@ script:
   - echo "access_key = ${S3_BUILD_KEY_ID}" > ~/.s3cfg
   - echo "secret_key = ${S3_BUILD_KEY_SECRET}" >> ~/.s3cfg
   - export REMOTE_CCACHE=s3://spacecodesign-dev/build/${CREATE_TOOLCHAIN}/ccache.tar.gz
-  - if [[ -n "$(s3cmd ls ${REMOTE_CCACHE} | grep ${REMOTE_CCACHE}$)" ]] ; then s3cmd get ${REMOTE_CCACHE} ccache.tar.gz ; tar -zxf ccache.tar.gz -C ~ ; fi
+  - if [[ -n "$(s3cmd ls ${REMOTE_CCACHE} | grep ${REMOTE_CCACHE}$)" ]] ; then s3cmd get --no-progress ${REMOTE_CCACHE} ccache.tar.gz ; tar -zxf ccache.tar.gz -C ~ ; fi
   - mv ${CREATE_TOOLCHAIN}.config /tmp/.config
   - cd /tmp
   - CCACHE_SLOPPINESS=include_file_mtime CCACHE_COMPILERCHECK=mtime ct-ng build.3
 
 after_success:
   - tar -zcf ccache.tar.gz -C ~ .ccache
-  - s3cmd put ccache.tar.gz ${REMOTE_CCACHE}
+  - s3cmd put --no-progress ccache.tar.gz ${REMOTE_CCACHE}
 
 after_failure:
   - tail --lines=100 build.log
