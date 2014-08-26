@@ -49,4 +49,6 @@ after_success:
 after_failure:
   - tail --lines=100 build.log
   - dmesg
+  - gzip build.log
+  - s3cmd put --no-progress build.log.gz s3://spacecodesign-dev/build/${CREATE_TOOLCHAIN}/build_fail.log.gz
 
