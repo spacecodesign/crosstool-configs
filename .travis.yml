@@ -33,20 +33,20 @@ script:
   - unset LD_LIBRARY_PATH
   - cd $TRAVIS_BUILD_DIR
   - if [[ -n "${CYGWIN_HOST}" ]]; then sudo ./ubuntu-install-cygwin-gcc; fi
-  - sudo apt-get install ash ccache
+  - sudo apt-get install ash ccache s3cmd
+  - echo "access_key = ${S3_BUILD_KEY_ID}" > ~/.s3cfg
+  - echo "secret_key = ${S3_BUILD_KEY_SECRET}" >> ~/.s3cfg
+  - s3cmd get s3://spacecodesign-dev/build/${CREATE_TOOLCHAIN}/ccache.tar.gz ccache.tar.gz
+  - tar -zxf ccache.tar.gz -C ~
   - mv ${CREATE_TOOLCHAIN}.config /tmp/.config
   - cd /tmp
   - CCACHE_SLOPPINESS=include_file_mtime CCACHE_COMPILERCHECK=mtime ct-ng build.3
+
+after_success:
+  - tar -zcf ccache.tar.gz -C ~ .ccache
+  - s3cmd put ccache.tar.gz s3://spacecodesign-dev/build/${CREATE_TOOLCHAIN}/ccache.tar.gz
 
 after_failure:
   - tail --lines=100 build.log
   - dmesg
 
-deploy:
-  provider: s3
-  access_key_id: $S3_BUILD_KEY_ID
-  secret_access_key: $S3_BUILD_KEY_SECRET
-  bucket: "spacecodesign-dev"
-  skip_cleanup: true
-  local-dir: ~/.ccache
-  upload-dir: build/ccache/${CREATE_TOOLCHAIN}
