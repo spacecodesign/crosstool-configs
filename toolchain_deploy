@@ -10,8 +10,7 @@ if [ -z "${REMOTE_DEPLOYDIR}" ] ; then
 fi
 
 toolchain_zip=$(mktemp)
-pushd /tmp/toolchains
-zip -qr ${toolchain_zip} ${CREATE_TOOLCHAIN}
+( cd /tmp/toolchains; zip -qr ${toolchain_zip} ${CREATE_TOOLCHAIN} )
 s3cmd --no-progress put ${toolchain_zip} ${REMOTE_DEPLOYDIR}/${CREATE_TOOLCHAIN}.zip
 rm ${toolchain_zip}
 
