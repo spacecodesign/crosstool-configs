@@ -1,0 +1,12 @@
+#!/bin/sh
+set -ex
+
+if [[ -z "${REMOTE_CCACHE}" ]] ; then
+  echo "Error: REMOTE_CCACHE not set"; exit 1
+fi
+
+ccache_tgz=$(mktemp)
+tar -zcf ${ccache_tgz} -C ~ .ccache
+s3cmd put ${ccache_tgz} ${REMOTE_CCACHE}
+rm ${ccache_tgz}
+

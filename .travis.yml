@@ -26,7 +26,7 @@ install:
   - sudo apt-get install gperf texinfo
 
 before_script:
-  - cd $TRAVIS_BUILD_DIR/crosstool-ng
+  - cd ${TRAVIS_BUILD_DIR}/crosstool-ng
   - ./bootstrap
   - ./configure --prefix=/tmp/ct-ng
   - make
@@ -36,20 +36,19 @@ before_script:
 script:
   - unset CC
   - unset LD_LIBRARY_PATH
-  - cd $TRAVIS_BUILD_DIR
+  - cd ${TRAVIS_BUILD_DIR}
   - if [[ -n "${CYGWIN_HOST}" ]]; then sudo ./ubuntu-install-cygwin-gcc; fi
   - sudo apt-get install ash ccache s3cmd
   - echo "access_key = ${S3_BUILD_KEY_ID}" > ~/.s3cfg
   - echo "secret_key = ${S3_BUILD_KEY_SECRET}" >> ~/.s3cfg
   - export REMOTE_CCACHE=s3://spacecodesign-dev/build/${CREATE_TOOLCHAIN}/ccache.tar.gz
-  - if [[ -n "$(s3cmd ls ${REMOTE_CCACHE} | grep ${REMOTE_CCACHE}$)" ]] ; then s3cmd get --no-progress ${REMOTE_CCACHE} ccache.tar.gz ; tar -zxf ccache.tar.gz -C ~ ; fi
+  - ./remote_ccache_get
   - mv ${CREATE_TOOLCHAIN}.config /tmp/.config
   - cd /tmp
   - CCACHE_SLOPPINESS=include_file_mtime CCACHE_COMPILERCHECK=mtime ct-ng build.3
 
 after_success:
-  - tar -zcf ccache.tar.gz -C ~ .ccache
-  - s3cmd put --no-progress ccache.tar.gz ${REMOTE_CCACHE}
+  - ${TRAVIS_BUILD_DIR}/remote_ccache_put
 
 after_failure:
   - tail --lines=100 build.log
