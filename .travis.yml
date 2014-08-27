@@ -8,7 +8,7 @@ language: c
 env:
   - CREATE_TOOLCHAIN=arm-none-eabi
   - CREATE_TOOLCHAIN=arm-unknown-linux-gnueabi
-  - CREATE_TOOLCHAIN=cygwin-arm-unknown-linux-gnueabi CYGWIN_HOST=1
+  - CREATE_TOOLCHAIN=arm_cyghost-unknown-linux-gnueabi CYGWIN_HOST=1
 
 before_install:
   - sudo service mysql stop
