@@ -1,7 +1,7 @@
 #!/bin/sh
 set -ex
 
-if [[ -z "${REMOTE_CCACHE}" ]] ; then
+if [ -z "${REMOTE_CCACHE}" ] ; then
   echo "Error: REMOTE_CCACHE not set"; exit 1
 fi
 
