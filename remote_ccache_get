@@ -7,7 +7,7 @@ fi
 
 if [ -n "$(s3cmd ls ${REMOTE_CCACHE} | grep ${REMOTE_CCACHE}$)" ] ; then
   ccache_tgz=$(mktemp)
-  s3cmd get ${REMOTE_CCACHE} ${ccache_tgz}
+  s3cmd --force --no-progress get ${REMOTE_CCACHE} ${ccache_tgz}
   tar -zxf ${ccache_tgz} -C ~
   rm ${ccache_tgz}
 fi
