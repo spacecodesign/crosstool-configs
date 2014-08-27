@@ -38,7 +38,7 @@ script:
   - unset LD_LIBRARY_PATH
   - cd ${TRAVIS_BUILD_DIR}
   - if [[ -n "${CYGWIN_HOST}" ]]; then sudo ./ubuntu-install-cygwin-gcc; fi
-  - sudo apt-get install ash ccache s3cmd
+  - sudo apt-get install ash ccache expect s3cmd
   - echo "access_key = ${S3_BUILD_KEY_ID}" > ~/.s3cfg
   - echo "secret_key = ${S3_BUILD_KEY_SECRET}" >> ~/.s3cfg
   - export REMOTE_CCACHE=s3://spacecodesign-dev/build/${CREATE_TOOLCHAIN}/ccache.tar.gz
