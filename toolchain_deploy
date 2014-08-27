@@ -5,8 +5,12 @@ if [ -z "${CREATE_TOOLCHAIN}" ] ; then
   echo "Error: CREATE_TOOLCHAIN not set"; exit 1
 fi
 
+if [ -z "${REMOTE_DEPLOYDIR}" ] ; then
+  echo "Error: REMOTE_DEPLOYDIR not set"; exit 1
+fi
+
 toolchain_tgz=$(mktemp)
 tar -zcf ${toolchain_tgz} -C /tmp/toolchains ${CREATE_TOOLCHAIN}
-s3cmd --no-progress put ${toolchain_tgz} s3://spacecodesign-dev/build/${CREATE_TOOLCHAIN}/${CREATE_TOOLCHAIN}.tar.gz
+s3cmd --no-progress put ${toolchain_tgz} ${REMOTE_DEPLOYDIR}/${CREATE_TOOLCHAIN}.tar.gz
 rm ${toolchain_tgz}
 

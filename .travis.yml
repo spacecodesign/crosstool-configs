@@ -41,7 +41,9 @@ script:
   - sudo apt-get install ash ccache expect s3cmd
   - echo "access_key = ${S3_BUILD_KEY_ID}" > ~/.s3cfg
   - echo "secret_key = ${S3_BUILD_KEY_SECRET}" >> ~/.s3cfg
-  - export REMOTE_CCACHE=s3://spacecodesign-dev/build/${CREATE_TOOLCHAIN}/ccache.tar.gz
+  - export REMOTE_BASEDIR=s3://spacecodesign-dev/build/toolchains
+  - export REMOTE_CCACHE=${REMOTE_BASEDIR}/${CREATE_TOOLCHAIN}_ccache.tar.gz
+  - export REMOTE_DEPLOYDIR=${REMOTE_BASEDIR}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_COMMIT}/${CREATE_TOOLCHAIN}
   - ./remote_ccache_get
   - mv ${CREATE_TOOLCHAIN}.config /tmp/.config
   - cd /tmp
@@ -59,4 +61,5 @@ after_failure:
 
 after_script:
   - gzip build.log
-  - s3cmd put --no-progress build.log.gz s3://spacecodesign-dev/build/${CREATE_TOOLCHAIN}/build_${BUILD_STATUS}.log.gz
+  - s3cmd put --no-progress build.log.gz ${REMOTE_DEPLOYDIR}/build_${BUILD_STATUS}.log.gz
+
