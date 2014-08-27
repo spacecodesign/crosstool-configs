@@ -1,0 +1,14 @@
+#!/usr/bin/expect
+
+set timeout -1
+
+eval spawn ct-ng $argv
+
+expect {
+  "Press 'Enter' to continue" { system "${TRAVIS_BUILD_DIR}/remote_ccache_put"; send "\n"; exp_continue }
+  eof
+}
+
+catch wait result
+exit [lindex $result 3]
+

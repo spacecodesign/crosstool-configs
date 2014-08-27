@@ -45,7 +45,7 @@ script:
   - ./remote_ccache_get
   - mv ${CREATE_TOOLCHAIN}.config /tmp/.config
   - cd /tmp
-  - CCACHE_SLOPPINESS=include_file_mtime CCACHE_COMPILERCHECK=mtime ct-ng build.3
+  - CCACHE_SLOPPINESS=include_file_mtime CCACHE_COMPILERCHECK=mtime ${TRAVIS_BUILD_DIR}/ct-ng-driver.exp build.3
 
 after_success:
   - ${TRAVIS_BUILD_DIR}/remote_ccache_put
